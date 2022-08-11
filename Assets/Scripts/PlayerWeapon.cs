@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    public GameObject bulletPrefab;
+
     private GameObject playerWeapon;
     private GameObject playerWeaponPivotPoint;
 
     private float weaponOffset = 0.8f;
+    private bool isInCooldown = false;
 
     void Start()
     {
@@ -33,23 +37,38 @@ public class PlayerWeapon : MonoBehaviour
     void Update()
     {
         rotateWeapon();
-
-
-        if (Input.GetButton("Fire1"))
-        {
-            fire();
-        }
+        fire();
     }
 
     private void rotateWeapon()
     {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerWeaponPivotPoint.transform.position;
-        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg + 90f;
+        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg + 90;
         playerWeaponPivotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + weaponOffset);
     }
 
     private void fire()
     {
-        Debug.Log("FIre");
+        if (Input.GetButton("Fire1"))
+        {
+            if (!isInCooldown)
+            {
+                StartCoroutine(fireWithDelay(.2f));
+            }
+
+        }
+    }
+
+    private IEnumerator fireWithDelay(float fireCooldown)
+    {
+        isInCooldown = true;
+        Debug.Log("fireWithDelay");
+
+        Debug.Log(playerWeaponPivotPoint.transform.rotation.z);
+
+        Instantiate(bulletPrefab, playerWeapon.transform.position, playerWeaponPivotPoint.transform.rotation);
+
+        yield return new WaitForSeconds(fireCooldown);
+        isInCooldown = false;
     }
 }
