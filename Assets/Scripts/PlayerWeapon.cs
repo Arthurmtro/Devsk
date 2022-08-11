@@ -51,24 +51,25 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            if (!isInCooldown)
-            {
-                StartCoroutine(fireWithDelay(.2f));
-            }
+            if (isInCooldown) return;
 
+            StartCoroutine(fireWithDelay(.2f));
         }
     }
 
     private IEnumerator fireWithDelay(float fireCooldown)
     {
         isInCooldown = true;
-        Debug.Log("fireWithDelay");
-
-        Debug.Log(playerWeaponPivotPoint.transform.rotation.z);
 
         Instantiate(bulletPrefab, playerWeapon.transform.position, playerWeaponPivotPoint.transform.rotation);
 
         yield return new WaitForSeconds(fireCooldown);
         isInCooldown = false;
+    }
+
+    public void addAmmo (int nbrOfAmmo)
+    {
+        Debug.Log("Find " + nbrOfAmmo +" ammo(s) !");
+
     }
 }

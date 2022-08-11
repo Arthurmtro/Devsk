@@ -8,6 +8,8 @@ TagManager:
   - Player Weapon Pivot Point
   - Bullets
   - Player Bullets
+  - Enemy
+  - Enemy Bullets
   layers:
   - Default
   - TransparentFX
