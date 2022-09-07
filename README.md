@@ -2,7 +2,7 @@
 
 # Idea
 
-This game represent the basic developper journey, made of * GUN FIGHTSS !! *
+This game represent the basic developper journey, made of **GUN FIGHTSS !!**
 Epic nah ? but don't worry it's not dangerous... maybe
 
 # Current Stage
@@ -12,7 +12,7 @@ Epic nah ? but don't worry it's not dangerous... maybe
  
 ## Informations about copies
 
-I made this repo open source so feel free to read the code base and submit your projects ideas
+- I made this repo open source so feel free to read the code base and submit your projects ideas
 
 
 `Happy codding !`
